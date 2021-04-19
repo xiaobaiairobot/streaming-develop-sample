@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.yunli.bigdata</groupId>
+  <artifactId>streaming-develop-sample</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>sdk-no-result-demo</module>
+    <module>sdk-rain-warning-demo</module>
+    <module>sdk-rain-window-warning-demo</module>
+  </modules>
+
+
+  <properties>
+    <flink.version>1.12.2</flink.version>
+    <scala.binary.version>2.11</scala.binary.version>
+    <springboot.version>2.2.8.RELEASE</springboot.version>
+    <jackson.version>2.10.4</jackson.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+</project>
