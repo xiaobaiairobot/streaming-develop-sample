@@ -18,7 +18,10 @@
 
 ## 使用方式
 
-基础SDK包在项目lib目录下，如果需要完全本地开发，请在lib目录下使用mvn命令安装到本地：
+基础SDK包在项目lib目录下，如无法获取请在该地址下载并放置到工程lib目录下：
+https://yunli-bigdata.oss-cn-beijing.aliyuncs.com/bigdata_public/v2.1.0/streaming/streaming-sdk-2.1.0-SNAPSHOT.jar
+
+如果需要完全本地开发，请在lib目录下使用mvn命令安装到本地：
 
 ```
 #streaming-sdk-2.1.0-SNAPSHOT.jar
@@ -26,3 +29,14 @@ mvn install:install-file -Dfile=streaming-sdk-2.1.0-SNAPSHOT.jar -DgroupId=com.y
 
 ```
 然后再运行本范例
+
+## IDEA下运行本范例方式
+
+    1、显示工具栏（View-appearance-toolbar）
+    2、Select Run/Debug configuration
+    3、编辑配置
+    4、Add Application
+    5、Main class固定填写：com.yunli.bigdata.streaming.bootstrap.StreamBootstrap
+    6、Use classpath of module: 选择3个子工程的任意一个
+    7、Working directory选择对应的文件夹路径
+    8、运行或调试即可
