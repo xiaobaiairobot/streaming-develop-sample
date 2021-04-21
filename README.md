@@ -15,3 +15,14 @@
 
 ### sdk-rain-window-warning-demo
 带滑动窗口的计算范例，根据N分钟降雨总量计算是否超过阈值，如果超过则产生预警。
+
+## 使用方式
+
+基础SDK包在项目lib目录下，如果需要完全本地开发，请在lib目录下使用mvn命令安装到本地：
+
+```
+#streaming-sdk-2.1.0-SNAPSHOT.jar
+mvn install:install-file -Dfile=streaming-sdk-2.1.0-SNAPSHOT.jar -DgroupId=com.yunli.bigdata.streaming -DartifactId=streaming-sdk -Dversion=2.1.0-RELEASE -Dpackaging=jar
+
+```
+然后再运行本范例
