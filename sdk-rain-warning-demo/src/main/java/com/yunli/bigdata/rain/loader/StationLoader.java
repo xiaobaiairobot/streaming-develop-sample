@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.flink.configuration.ConfigOption;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 import org.apache.flink.streaming.api.functions.source.SourceFunction.SourceContext;
@@ -31,8 +32,11 @@ public class StationLoader implements Runnable {
 
   private final Logger LOGGER = LoggerFactory.getLogger(StationLoader.class);
 
+  private String password = null;
+
   public StationLoader(Map<String, String> args) {
     // use args
+    this.password = args.get("password");
   }
 
   @Override
@@ -77,7 +81,9 @@ public class StationLoader implements Runnable {
 
         }
       };
-      mysqlsource.open(null);
+      Configuration configuration = new Configuration();
+      configuration.setString("password", this.password);
+      mysqlsource.open(configuration);
       mysqlsource.run(new NonTimestampContext(lock, output));
     } catch (Exception e) {
       e.printStackTrace();
@@ -103,7 +109,7 @@ public class StationLoader implements Runnable {
     //open只执行一次,适合开启资源
     @Override
     public void open(Configuration parameters) throws Exception {
-      conn = DriverManager.getConnection("jdbc:mysql://172.30.13.179:3306/test_db", "root", "yunli2@AUG");
+      conn = DriverManager.getConnection("jdbc:mysql://172.30.13.179:3306/test_db", "root", parameters.getString("password",null));
       String sql = "select stcd,stnm,sttp,lgtd,lttd from st_stbprp_b";
       ps = conn.prepareStatement(sql);
     }
