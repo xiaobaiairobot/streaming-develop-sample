@@ -21,4 +21,11 @@ public class WarnDomain implements Serializable {
   public WarnDomain(String message) {
     this.message = message;
   }
+
+  @Override
+  public String toString() {
+    return "WarnDomain{" +
+        "message='" + message + '\'' +
+        '}';
+  }
 }

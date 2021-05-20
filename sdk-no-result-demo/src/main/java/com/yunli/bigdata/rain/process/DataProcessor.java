@@ -38,6 +38,9 @@ public class DataProcessor implements Processor {
     List<OutputMessage> list = new ArrayList<>();
     for (InputMessage input : inputs) {
       MessageData messageData = (MessageData) input.getBody();
+      if(messageData == null){
+        continue;
+      }
       for (RainDataDomain rainData : messageData.getData()) {
         if (rainData != null && rainData.getDrp() != null && rainData.getDrp() >= maxRainThreshold) {
           // 超过阈值
@@ -53,7 +56,7 @@ public class DataProcessor implements Processor {
 
   private OutputMessage generateWarnMessage(RainDataDomain rainData) {
     String warnMessage = String
-        .format("%s站点在%s降雨量为%smm，超过告警阈值%s，请重点关注。", rainData.getStcd(), rainData.getTm(), rainData.getDrp(),
+        .format("%s站点在%s降雨量为%s（mm），超过告警阈值%s，请重点关注。", rainData.getStcd(), rainData.getTm(), rainData.getDrp(),
             this.maxRainThreshold);
     LOGGER.info("the warn message is : {}", warnMessage);
     return new OutputMessage(UUID.randomUUID().toString(), new WarnDomain(warnMessage));

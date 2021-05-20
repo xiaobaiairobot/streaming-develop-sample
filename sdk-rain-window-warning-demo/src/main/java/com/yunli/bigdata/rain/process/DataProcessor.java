@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.yunli.bigdata.rain.domain.MessageData;
 import com.yunli.bigdata.rain.domain.RainDataDomain;
 import com.yunli.bigdata.rain.domain.WarnDomain;
+import com.yunli.bigdata.rain.util.DateUtil;
 import com.yunli.bigdata.streaming.InputMessage;
 import com.yunli.bigdata.streaming.OutputMessage;
 import com.yunli.bigdata.streaming.Processor;
@@ -36,10 +37,13 @@ public class DataProcessor implements Processor {
         maxRainThreshold = Double.parseDouble(strRainThreshold);
       }
     }
-    LOGGER.info("the data size is : {}", inputs.size());
+
     Double sumRain = 0D;
+    Double sumCurrentRain = 0D;
     Date dtMin = new Date(0);
     Date dtMax = new Date(0);
+    OutputMessage out = null;
+
     for (InputMessage input : inputs) {
       MessageData messageData = (MessageData) input.getBody();
       for (RainDataDomain rainData : messageData.getData()) {
@@ -54,23 +58,37 @@ public class DataProcessor implements Processor {
         }
         sumRain += rainData.getDrp();
         if (sumRain >= maxRainThreshold) {
-          // 超过阈值
-          return Collections.singletonList(
-              generateWarnMessage(rainData, sumRain, dtMin, dtMax)
-          );
+          if (out == null) {
+            // 超过阈值
+            out = generateWarnMessage(rainData, sumRain, dtMin, dtMax);
+            sumCurrentRain = sumRain;
+          } else {
+            if (sumRain > sumCurrentRain) {
+              sumCurrentRain = sumRain;
+              out = generateWarnMessage(rainData, sumRain, dtMin, dtMax);
+            }
+          }
         } else {
-          LOGGER.info("the normal rain sum:{}, data is : {}", sumRain, rainData);
+          LOGGER.debug("the normal rain sum:{}, data is : {}", sumRain, rainData);
         }
       }
+    }
+    LOGGER.info("the data size is : {} from: {} -- {}", inputs.size(), DateUtil.toStandardString(dtMin),
+        DateUtil.toStandardString(dtMax));
+    if (out != null) {
+      LOGGER.error("the warn message is : {}", out.getBody().toString());
+      return Collections.singletonList(
+          out
+      );
     }
     return null;
   }
 
   private OutputMessage generateWarnMessage(RainDataDomain rainData, Double sumRain, Date dtStart, Date dtEnd) {
     String warnMessage = String
-        .format("%s站点在 %s ~ %s 区间，累积降雨量为%smm，超过告警阈值%s，请重点关注。", rainData.getStcd(), dtStart, dtEnd, sumRain,
+        .format("%s站点在 %s ~ %s 区间，累积降雨量为%smm，超过告警阈值%s，请重点关注。", rainData.getStcd(), DateUtil.toStandardString(dtStart),
+            DateUtil.toStandardString(dtEnd), sumRain,
             this.maxRainThreshold);
-    LOGGER.info("the warn message is : {}", warnMessage);
     return new OutputMessage(UUID.randomUUID().toString(), new WarnDomain(warnMessage));
   }
 }

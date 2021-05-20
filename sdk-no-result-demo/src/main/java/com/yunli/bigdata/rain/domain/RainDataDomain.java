@@ -3,6 +3,8 @@ package com.yunli.bigdata.rain.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author david
  * @date 2021/3/31 3:24 下午
@@ -12,6 +14,7 @@ public class RainDataDomain implements Serializable {
   private String stcd;
 
   // 时间
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private Date tm;
 
   // 时段降雨量

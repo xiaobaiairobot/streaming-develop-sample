@@ -17,13 +17,15 @@ import com.yunli.bigdata.streaming.InputMessage;
 public class OutlierFilter implements Filter {
   private final Logger LOGGER = LoggerFactory.getLogger(OutlierFilter.class);
 
+  private final String TYPE = "rain";
+
   @Override
   public boolean filter(InputMessage input, Map<String, String> args) throws Exception {
     MessageData rainData = (MessageData) input.getBody();
     if (rainData == null) {
       return false;
     }
-    if (!"rain".equals(rainData.getType())) {
+    if (!TYPE.equals(rainData.getType())) {
       LOGGER.info("skip the data which type is not matched , type : {}, data: {}", rainData.getType(),
           rainData.getData());
       return false;
