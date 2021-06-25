@@ -9,7 +9,7 @@
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>
   </root>
-  <logger name="com.yunli.bigdata">
+  <logger name="com.yunli.com.yunli.bigdata">
     <level value="INFO"/>
   </logger>
 </configuration>
