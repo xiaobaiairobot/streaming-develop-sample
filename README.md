@@ -13,8 +13,8 @@
 ### sdk-rain-warning-demo
 实时流数据与数据库中的维度表关联的范例，根据降雨数据超过阈值则产生预警，预警中包含测站名称。其中测站名称来源于MySQL数据库
 
-### sdk-rain-warning-demo
-与 sdk-rain-warning-demo 类似，不同点在于，最后数据不是输出到队列，而是在prossessor中自定义
+### sdk-rain-warning-coutput-demo
+与 sdk-rain-warning-demo 类似，不同点在于，最后数据不是输出到队列，而是在processor中自定义(mysql),
 
 ### sdk-rain-window-warning-demo
 带滑动窗口的计算范例，根据N分钟降雨总量计算是否超过阈值，如果超过则产生预警。
