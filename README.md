@@ -21,10 +21,19 @@
 
 ## 使用方式
 
+注意，SDK版本与平台版本需要一致，假如2.2版本中使用了2.1版本的SDK，则任务中消费的数据量统计不准确。
+
 基础SDK包在项目lib目录下，如无法获取请在该地址下载并放置到工程lib目录下：
+```shell script
 https://yunli-com.yunli.bigdata.oss-cn-beijing.aliyuncs.com/bigdata_public/v2.1.0/streaming/streaming-sdk-2.1.0-SNAPSHOT.jar
 
-如果需要完全本地开发，请在lib目录下使用mvn命令安装到本地：
+https://yunli-bigdata.oss-cn-beijing.aliyuncs.com/bigdata_public/v2.2.0/streaming-sdk-2.2.0-SNAPSHOT.jar
+
+https://yunli-bigdata.oss-cn-beijing.aliyuncs.com/bigdata_public/v2.3.0/streaming-sdk-2.3.0-SNAPSHOT.jar
+```
+
+
+如果需要完全本地开发，请在lib目录下使用mvn命令安装到本地，如：
 
 ```
 #streaming-sdk-2.1.0-SNAPSHOT.jar
