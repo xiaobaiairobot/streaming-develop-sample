@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>streaming-develop-sample</artifactId>
-    <groupId>com.yunli.com.yunli.bigdata</groupId>
+    <groupId>com.yunli.bigdata</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -68,7 +68,7 @@
                 </transformer>
                 <!--此为流计算启动入口MainClass，请不要修改-->
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.yunli.com.yunli.bigdata.streaming.bootstrap.StreamBootstrap</mainClass>
+                  <mainClass>com.yunli.bigdata.streaming.bootstrap.StreamBootstrap</mainClass>
                 </transformer>
               </transformers>
               <createDependencyReducedPom>false</createDependencyReducedPom>

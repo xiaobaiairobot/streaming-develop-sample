@@ -37,7 +37,7 @@ https://yunli-bigdata.oss-cn-beijing.aliyuncs.com/bigdata_public/v2.3.0/streamin
 
 ```
 #streaming-sdk-2.1.0-SNAPSHOT.jar
-mvn install:install-file -Dfile=streaming-sdk-2.1.0-SNAPSHOT.jar -DgroupId=com.yunli.com.yunli.bigdata.streaming -DartifactId=streaming-sdk -Dversion=2.1.0-RELEASE -Dpackaging=jar
+mvn install:install-file -Dfile=streaming-sdk-2.1.0-SNAPSHOT.jar -DgroupId=com.yunli.bigdata.streaming -DartifactId=streaming-sdk -Dversion=2.1.0-RELEASE -Dpackaging=jar
 
 ```
 然后再运行本范例
@@ -48,7 +48,7 @@ mvn install:install-file -Dfile=streaming-sdk-2.1.0-SNAPSHOT.jar -DgroupId=com.y
     2、Select Run/Debug configuration
     3、编辑配置
     4、Add Application
-    5、Main class固定填写：com.yunli.com.yunli.bigdata.streaming.bootstrap.StreamBootstrap
+    5、Main class固定填写：com.yunli.bigdata.streaming.bootstrap.StreamBootstrap
     6、Use classpath of module: 选择3个子工程的任意一个
     7、Working directory选择对应的文件夹路径
     8、运行或调试即可
