@@ -88,6 +88,7 @@ public class OutPutAction  implements Runnable {
     Integer port = config.getPort();
     String password = config.getPassword();
     String user = config.getUser();
+    Class.forName(com.mysql.jdbc.Driver.class.getName());  //注册数据库驱动
     conn = DriverManager
         .getConnection("jdbc:mysql://"+host+":"+port+"/test_db", user,password);
   }
